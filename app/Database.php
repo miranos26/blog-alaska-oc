@@ -23,7 +23,7 @@ Class Database{
     private function getPDO(){
         //Accesseur qui evite de créer plusieurs connexions simultanés à la BDD
         if($this->pdo === null){
-            $pdo = new PDO('mysql:dbname=blog;host=localhost', 'root', '');
+            $pdo = new PDO('mysql:dbname=blog;host=localhost', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
             //Fait appel aux constantes de PDO pour afficher les erreurs si un problème survient dans une requête sql
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo = $pdo;
@@ -31,11 +31,16 @@ Class Database{
         return $this->pdo;
     }
 
-    public function query($statement, $class_name){
+    public function query($statement, $class_name, $one = false){
         // On stock le resultat de la requête dans une variable result pour pouvoir l'exploiter avec un fetchAll()
         $req = $this->getPDO()->query($statement);
+        $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
         // Fetch all avec la constante FETCH_OBJ nous retourne chaque entrée sous forme d'objet stdClass
-        $datas = $req->fetchAll(PDO::FETCH_CLASS, $class_name);
+        if($one) {
+            $datas = $req->fetch();
+        } else {
+            $datas = $req->fetchAll();
+        }
         // $datas est un tableau d'objet
         return $datas;
     }

@@ -2,24 +2,48 @@
 
 namespace App\Table;
 
-class Article{
+use App\App;
 
+class Article extends Table {
 
-    // Methode magique qui remplace une fonction appellée qui n'existe pas par une autre fonction (permet d'appeller nos GETTERS proprement dans les views)
-    public function __get($key){
-        $method = 'get' . ucfirst($key);
-        //$Method sera automatiquement remplacée par la bonne methode. On stock le retour en variable d'instance pour ne pas que ça soit appellé tout le temps
-        $this->$key = $this->$method();
-        return $this->$key;
+    protected static $table = 'posts';
+
+    public static function find($id){
+        return self::query("
+            SELECT posts.id, posts.title, posts.content, categories.title as categorie 
+            FROM posts 
+            LEFT JOIN categories ON posts.category_id = categories.id 
+            WHERE posts.id = ?
+            ", [$id], true);
     }
 
-        public function getUrl(){
-            return 'index.php?p=article&id=' . $this->id;
-        }
+    public static function getLast(){
+        return self::query("
+            SELECT posts.id, posts.title, posts.content, categories.title as categorie 
+            FROM posts 
+            LEFT JOIN categories ON posts.category_id = categories.id
+            ORDER BY posts.date DESC
+            ");
+    }
 
-        public function getExcerpt(){
-            $html = '<p>' . substr($this->content,0,250) . '...</p>';
-            $html .= '<p><a href=""' . $this->getURL() . '">Voir la suite</a></p>';
-            return $html;
-        }
+    public static function lastByCategory($category_id){
+        return self::query("
+            SELECT posts.id, posts.title, posts.content, categories.title as categorie 
+            FROM posts 
+            LEFT JOIN categories 
+              ON posts.category_id = categories.id
+              WHERE category_id = ? 
+              ORDER BY posts.date DESC
+            ", [$category_id]);
+    }
+
+    public function getUrl(){
+        return 'index.php?p=article&id=' . $this->id;
+    }
+
+    public function getExcerpt(){
+        $html = '<p>' . substr($this->content,0,250) . '...</p>';
+        $html .= '<p><a href=""' . $this->getURL() . '">Voir la suite</a></p>';
+        return $html;
+    }
 }
