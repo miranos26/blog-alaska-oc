@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace Core\Database;
 
-//Permet de trouver la class PDO qui est à la racine et pas dans le namespace
+//Permet de trouver la class PDO qui est à la racine et pas dans le namespace comme fonction native PHP
 use \PDO;
 
-Class Database{
+Class MysqlDatabase extends Database{
 
     private $db_name;
     private $db_user;
@@ -21,7 +21,7 @@ Class Database{
     }
 
     private function getPDO(){
-        //Accesseur qui evite de créer plusieurs connexions simultanés à la BDD
+        //Accesseur qui evite de créer plusieurs connexions simultanés à la BDD quand appellé par query et prepare
         if($this->pdo === null){
             $pdo = new PDO('mysql:dbname=blog;host=localhost', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
             //Fait appel aux constantes de PDO pour afficher les erreurs si un problème survient dans une requête sql
@@ -31,17 +31,21 @@ Class Database{
         return $this->pdo;
     }
 
-    public function query($statement, $class_name, $one = false){
+    public function query($statement, $class_name = null, $one = false){
         // On stock le resultat de la requête dans une variable result pour pouvoir l'exploiter avec un fetchAll()
         $req = $this->getPDO()->query($statement);
-        $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
-        // Fetch all avec la constante FETCH_OBJ nous retourne chaque entrée sous forme d'objet stdClass
+        // Si on reçoit bien le nom de la class en paramètre, on fait un Fetch_class, sinon un fetch Obj
+        if($class_name === null){
+            $req->setFetchMode(PDO::FETCH_OBJ);
+        } else {
+            $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
+        }
+        // Si on ne veut récupérer qu'un seul article, on met $one à true dans la requête
         if($one) {
             $datas = $req->fetch();
         } else {
             $datas = $req->fetchAll();
         }
-        // $datas est un tableau d'objet
         return $datas;
     }
 
