@@ -13,18 +13,22 @@ if(isset($_GET['p'])){
     $page = 'home';
 }
 
-ob_start();
-
 if($page === 'home'){
-    require ROOT . '/pages/posts/home.php';
+    $controller = new \App\Controller\PostController();
+    $controller->index();
 } elseif ($page ==='posts.category'){
-    require ROOT . '/pages/posts/category.php';
+    $controller = new \App\Controller\PostController();
+    $controller->category();
 }elseif ($page ==='posts.show'){
-    require ROOT . '/pages/posts/show.php';
+    $controller = new \App\Controller\PostController();
+    $controller->show();
 }elseif ($page ==='login'){
-    require ROOT . '/pages/users/login.php';
+    $controller = new \App\Controller\UsersController();
+    $controller->login();
+} elseif( $page === 'admin.posts.index'){
+    $controller = new \App\Controller\Admin\PostController();
+    $controller->index();
+}elseif( $page === 'admin.posts.edit') {
+    $controller = new \App\Controller\Admin\PostController();
+    $controller->index();
 }
-
-$content = ob_get_clean();
-
-require ROOT . '/pages/templates/default.php';

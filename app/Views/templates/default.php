@@ -14,6 +14,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../public/css/style.css" rel="stylesheet">
 
 
 </head>
@@ -37,6 +38,13 @@
     </div>
 
 </div><!-- /.container -->
+
+<footer
+
+<div class="footer">
+    <a href="index.php?p=admin.posts.index">Administration</a>
+</div>
+</footer>
 
 </body>
 </html>

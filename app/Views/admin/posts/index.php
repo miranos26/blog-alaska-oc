@@ -1,9 +1,3 @@
-<?php
-
-$posts = App::getInstance()->getTable('Post')->all();
-?>
-
-
 <h1> Administrer les articles </h1>
 
 <p>

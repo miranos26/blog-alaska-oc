@@ -8,6 +8,7 @@ class DBAuth {
 
     private $db;
 
+    //Injection de dépendance, le constructeur a besoin d'une connexion à la BDD pour fonctionner
     public function __construct(Database $db) {
         $this->db = $db;
     }
@@ -33,7 +34,7 @@ class DBAuth {
                 return true;
             }
         }
-        //return false;
+        return false;
     }
 
     public function logged(){
