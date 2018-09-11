@@ -2,9 +2,6 @@
 
 namespace Core\Controller;
 
-use Core\Auth\DBAuth;
-use App;
-
 class Controller{
 
     protected $viewPath;
@@ -19,13 +16,8 @@ class Controller{
     }
 
     protected function forbidden(){
-        $auth = new DBAuth(App::getInstance()->getDb());
-        if($auth->logged()){
-            header('Location: index.php?p=admin.posts.index');
-        } else {
-            header('Location: index.php?p=login');
-        }
-
+        header('HTTP/1.0 403 Forbidden');
+        die('Acces interdit');
     }
 
     protected function notFound(){

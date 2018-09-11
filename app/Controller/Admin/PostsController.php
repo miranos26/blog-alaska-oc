@@ -3,57 +3,57 @@
 namespace App\Controller\Admin;
 
 use Core\HTML\BootstrapForm;
-use App;
 
-class PostController extends AppController{
+class PostsController extends AppController{
 
     public function __construct(){
         parent::__construct();
+        $this->loadModel('Post');
     }
 
     public function index(){
-        $posts = App::getInstance()->getTable('Post')->all();
+        $posts = $this->Post->all();
         $this->render('admin.posts.index', compact('posts'));
     }
 
     public function add(){
         if (!empty($_POST)) {
-            $result = App::getInstance()->getTable('Post')->create([
-                'titre' => $_POST['titre'],
-                'contenu' => $_POST['contenu'],
+            $result = $this->Post->create([
+                'title' => $_POST['title'],
+                'content' => $_POST['content'],
                 'category_id' => $_POST['category_id']
             ]);
             if($result){
                 return $this->index();
             }
         }
-        $categories = App::getInstance()->getTable('Category');
-        $categories->extract('id', 'titre');
+        $this->loadModel('Category');
+        $categories = $this->Category->extract('id', 'title');
         $form = new BootstrapForm($_POST);
         $this->render('admin.posts.edit', compact('categories', 'form'));
     }
 
     public function edit(){
         if (!empty($_POST)) {
-            $result = App::getInstance()->getTable('Post')->update($_GET['id'], [
-                'titre' => $_POST['titre'],
-                'contenu' => $_POST['contenu'],
+            $result = $this->Post->update($_GET['id'], [
+                'title' => $_POST['title'],
+                'content' => $_POST['content'],
                 'category_id' => $_POST['category_id']
             ]);
             if($result){
                 return $this->index();
             }
         }
-        $post = App::getInstance()->getTable('Post')->find($_GET['id']);
-        $categories = App::getInstance()->getTable('Category');
-        $categories->extract('id', 'titre');
+        $post = $this->Post->find($_GET['id']);
+        $this->loadModel('Category');
+        $categories = $this->Category->extract('id', 'title');
         $form = new BootstrapForm($post);
         $this->render('admin.posts.edit', compact('categories', 'form'));
     }
 
     public function delete(){
         if (!empty($_POST)) {
-            $result = App::getInstance()->getTable('Post')->delete($_POST['id']);
+            $result = $this->Post->delete($_POST['id']);
             return $this->index();
         }
     }

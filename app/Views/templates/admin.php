@@ -17,6 +17,13 @@
     <link href="../public/css/style.css" rel="stylesheet">
 
 
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=j2vmqsr7sxig4janv8sevdfu6gjr8x1qs7m12jeho8g939tv"></script>
+    <script>tinymce.init({
+            selector:'.wysiwyg',
+    });
+    </script>
+
+
 </head>
 
 <body>
@@ -42,9 +49,10 @@
 <footer
 
 <div class="footer">
-    <a href="index.php?p=users.login">Administration</a>
+    <a href="index.php?p=users.login">Retour</a>
 </div>
 </footer>
 
 </body>
+
 </html>

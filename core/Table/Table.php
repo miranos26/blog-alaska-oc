@@ -59,6 +59,7 @@ class Table
     }
 
     public function extract($key, $value){
+
         $records = $this->all();
         $return = [];
 
@@ -67,6 +68,7 @@ class Table
         }
 
         return $return;
+        var_dump($return);
     }
 
     public function query($statement, $attributes = null, $one = false)
