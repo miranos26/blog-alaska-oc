@@ -14,7 +14,6 @@ class DBAuth {
     }
 
     public function getUserId(){
-
         if($this->logged()){
             return $_SESSION['auth'];
         }
@@ -27,11 +26,18 @@ class DBAuth {
      * @return boolean
      */
     public function login($username, $password){
+
         $user = $this->db->prepare('SELECT * FROM users WHERE username = ?', [$username], '', true);
         if($user){
             if($user['password'] === sha1($password)){
                 $_SESSION['auth'] = $user['id'];
-                return true;
+                if($user['role'] === 'admin'){
+                    $userType = 'admin';
+                    return $userType;
+                } elseif($user['role'] === 'basic_user'){
+                    $userType = 'basic_user';
+                    return $userType;
+                }
             }
         }
         return false;

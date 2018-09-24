@@ -56,6 +56,14 @@ class Form{
         );
     }
 
+    public function file($name, $label, $options = []){
+        $type = isset($options['type']) ? $options['type'] : 'text';
+        return $this->surround(
+            '<input type="' . $type . '" name="' . $name . '">'
+        );
+    }
+
+
     /**
      * @return string
      */

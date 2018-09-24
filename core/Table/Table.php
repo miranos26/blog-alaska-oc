@@ -33,7 +33,7 @@ class Table
     public function update($id, $fields){
         $sql_parts = [];
         $attributes = [];
-        foreach($fields as $k=> $v){
+        foreach($fields as $k => $v){
             $sql_parts[] = "$k = ?";
             $attributes[] = $v;
         }
@@ -68,7 +68,6 @@ class Table
         }
 
         return $return;
-        var_dump($return);
     }
 
     public function query($statement, $attributes = null, $one = false)

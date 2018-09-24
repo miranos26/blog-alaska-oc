@@ -7,17 +7,20 @@ class Controller{
     protected $viewPath;
     protected $template;
 
+
+
     protected function render($view, $variables = []){
         ob_start();
+        require(__DIR__ . '/../../app/Views/viewFunction.php');
         extract($variables);
         require($this->viewPath . str_replace('.', '/', $view) . '.php');
         $content = ob_get_clean();
         require($this->viewPath . 'templates/' . $this->template . '.php');
     }
 
-    protected function forbidden(){
-        header('HTTP/1.0 403 Forbidden');
-        die('Acces interdit');
+    public function forbidden(){
+       $this->template = 'default';
+       $this->render('posts.forbidden');
     }
 
     protected function notFound(){

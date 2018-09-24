@@ -13,10 +13,11 @@ class PostTable extends Table{
      */
     public function last(){
         return $this->query("
-        SELECT posts.id, posts.title, posts.content, posts.date, category.title as categorie
+        SELECT posts.id, posts.title, posts.content, posts.date, posts.featured_image, category.title as categorie
         FROM posts
         LEFT JOIN category ON category_id = category.id
-        ORDER BY posts.date DESC");
+        ORDER BY posts.date DESC
+        LIMIT 3");
     }
 
     /**
@@ -26,7 +27,7 @@ class PostTable extends Table{
      */
     public function lastByCategory($category_id){
         return $this->query("
-        SELECT posts.id, posts.title, posts.content, posts.date, category.title as categorie
+        SELECT posts.id, posts.title, posts.content, posts.date, posts.featured_image, category.title as categorie
         FROM posts
         LEFT JOIN category ON category_id = category.id
         WHERE posts.category_id = ?
@@ -40,10 +41,19 @@ class PostTable extends Table{
      */
     public function findWithCategory($id){
         return $this->query("
-        SELECT posts.id, posts.title, posts.content, posts.date, category.title as categorie
+        SELECT posts.id, posts.title, posts.content, posts.date, posts.featured_image, category.title as categorie
         FROM posts
         LEFT JOIN category ON category_id = category.id
         WHERE posts.id = ?", [$id], true);
+    }
+
+    public function all(){
+        return $this->query("
+        SELECT posts.id, posts.title, posts.content, posts.date, posts.featured_image, category.title as categorie
+        FROM posts
+        LEFT JOIN category ON category_id = category.id
+        ORDER BY posts.date DESC
+        ");
     }
 
 }
