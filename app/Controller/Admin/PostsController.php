@@ -98,7 +98,7 @@ class PostsController extends AppController{
             if(isset($_SESSION['tokenDelArt']) AND isset($_POST['tokenDelArt']) AND !empty($_SESSION['tokenDelArt']) AND !empty($_POST['tokenDelArt'])){
                 if($_SESSION['tokenDelArt'] == $_POST['tokenDelArt']){
                     $this->Post->delete($_POST['id']);
-                    header("Location:/blog-alaska-oc/public/admin");
+                    header("Location:/admin");
                 }
             }
         }

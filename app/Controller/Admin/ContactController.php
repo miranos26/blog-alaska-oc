@@ -29,7 +29,7 @@ class ContactController extends AppController
             if(isset($_SESSION['tokenDelMessage']) AND isset($_POST['tokenDelMessage']) AND !empty($_SESSION['tokenDelMessage']) AND !empty($_POST['tokenDelMessage'])){
                 if($_SESSION['tokenDelMessage'] == $_POST['tokenDelMessage']){
                     $this->Contact->delete($_POST['id']);
-                    header("Location:/blog-alaska-oc/public/admin/messages");
+                    header("Location:/admin/messages");
                 }
             }
         }
@@ -40,7 +40,7 @@ class ContactController extends AppController
             if(isset($_SESSION['tokenDelEntry']) AND isset($_POST['tokenDelEntry']) AND !empty($_SESSION['tokenDelEntry']) AND !empty($_POST['tokenDelEntry'])){
                 if($_SESSION['tokenDelEntry'] == $_POST['tokenDelEntry']){
                     $this->Newsletter->delete($_POST['id']);
-                    return $this->newsletter();
+                    header("Location:/admin/newsletter");
                 }
             }
         }

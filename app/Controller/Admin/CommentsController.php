@@ -23,7 +23,7 @@ class CommentsController extends AppController{
             if(isset($_SESSION['tokenDelComment']) AND isset($_POST['tokenDelComment']) AND !empty($_SESSION['tokenDelComment']) AND !empty($_POST['tokenDelComment'])){
                 if($_SESSION['tokenDelComment'] == $_POST['tokenDelComment']){
                     $this->Comments->delete($_POST['id']);
-                    header("Location:/blog-alaska-oc/public/admin/commentaires");
+                    header("Location:/admin/commentaires");
                 }
             }
         }

@@ -22,7 +22,7 @@
         </div>
 
 
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" class="mb-5">
 
             <input type="hidden" name="MAX_FILE_SIZE" value="3000000"/>
 

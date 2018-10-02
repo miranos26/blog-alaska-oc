@@ -19,7 +19,7 @@ class CommentsController extends AppController
         if (!empty($_POST)) {
             $pseudo = htmlspecialchars($_POST['pseudo']);
             $content = htmlspecialchars($_POST['content']);
-            $post_id = htmlspecialchars($_POST['id']);
+            $post_id = htmlspecialchars($_POST['post_id']);
 
             $this->comments->create([
                 'pseudo' => $pseudo,

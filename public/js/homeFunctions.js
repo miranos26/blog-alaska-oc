@@ -10,25 +10,29 @@ $('.slider').slick({
 
 $('body').scrollspy({ target: '#main-nav' });
 
+let url = window.location.href;
+
 // Add smooth scrolling
-$('#main-nav a').on('click', function (e) {
-    // Check for a hash value
-    if (this.hash !== '') {
-        // Prevent default behavior
-        e.preventDefault();
+if (url === 'http://jean-forteroche.kevincadier.fr/' || url === 'http://jean-forteroche.kevincadier.fr/#livre' || url === 'http://jean-forteroche.kevincadier.fr/#equipe' || url === 'http://jean-forteroche.kevincadier.fr/#contact')
+{
+    $('#main-nav a').on('click', function (e) {
+        // Check for a hash value
+        if (this.hash !== '') {
+            // Prevent default behavior
+            e.preventDefault();
+            // Store hash
+            const hash = this.hash;
+            // Animate smooth scroll
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 900, function () {
+                // Add hash to URL after scroll
+                window.location.hash = hash;
+            });
+        }
+    });
+}
 
-        // Store hash
-        const hash = this.hash;
-
-        // Animate smooth scroll
-        $('html, body').animate({
-            scrollTop: $(hash).offset().top
-        }, 900, function () {
-            // Add hash to URL after scroll
-            window.location.hash = hash;
-        });
-    }
-});
 
 
 $('.signaler').submit(function (event){
@@ -39,7 +43,7 @@ $('.signaler').submit(function (event){
 
     $.ajax({
         method : "post",
-        url : '/blog-alaska-oc/public/article/report',
+        url : '/article/report',
         data: {
             'reported' : reported,
             'comment_id' : comment_id
@@ -69,7 +73,7 @@ $('#contactForm').submit(function(event){
     } else {
         $.ajax({
             method: 'post',
-            url: '/blog-alaska-oc/public/contact',
+            url: '/contact',
             data: {
                 'name': name,
                 'email': email,
@@ -104,7 +108,7 @@ $('#newsletter-form').submit(function(event){
     let newsName =$.trim($('#newsletter-name').val());
     let newsEmail = $.trim($('#newsletter-email').val());
 
-    if( newsName === 'Nom' || newsEmail === 'Email') {
+    if( newsName === 'Nom' || newsEmail === 'Email' || newsName === '' || newsEmail === '') {
         $('#news-failed').removeClass("d-none");
         setTimeout(function () {
             $('#news-failed').fadeOut().empty();
@@ -151,7 +155,7 @@ $('#commentForm').submit( function(event){
     } else {
         $.ajax({
             method: "POST",
-            url: '/blog-alaska-oc/public/article/addComment',
+            url: '/article/addComment',
             data: {
                 'pseudo': pseudo,
                 'content': comment,
@@ -193,7 +197,7 @@ $('#connexion').submit(function(event) {
     } else {
         $.ajax({
             method: "POST",
-            url: '/blog-alaska-oc/public/login',
+            url: '/login',
             dataType: 'json',
             data: {
                 'username': username,
@@ -210,7 +214,7 @@ $('#connexion').submit(function(event) {
         }).done(function(response){
             if(response.success){
                 console.log(response);
-                window.location.href = "/blog-alaska-oc/public/admin";
+                window.location.href = "/admin";
             } else {
                 $('#login-fail').removeClass("d-none");
                 setTimeout(function() {

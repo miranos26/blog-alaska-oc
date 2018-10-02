@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav">
                     <li class="nav-item px-2">
-                        <a href="<?php echo $functions->filePath('admin') ?>" class="nav-link active" id="dashboard"> Articles </a>
+                        <a href="<?php echo $functions->filePath('admin') ?>" class="nav-link" id="dashboard"> Articles </a>
                     </li>
                     <li class="nav-item px-2">
                         <a href="<?php echo $functions->filePath('admin/categories') ?>" class="nav-link" id="categories"> Categories </a>
@@ -34,10 +34,10 @@
                         <a href="<?php echo $functions->filePath('admin/commentaires') ?>" class="nav-link" id="comments"> Commentaires </a>
                     </li>
                     <li class="nav-item px-2">
-                        <a href="<?php echo $functions->filePath('admin/messages') ?>" class="nav-link" id="comments"> Messages </a>
+                        <a href="<?php echo $functions->filePath('admin/messages') ?>" class="nav-link" id="messages"> Messages </a>
                     </li>
                     <li class="nav-item px-2">
-                        <a href="<?php echo $functions->filePath('admin/newsletter') ?>" class="nav-link" id="comments"> Newsletter </a>
+                        <a href="<?php echo $functions->filePath('admin/newsletter') ?>" class="nav-link" id="newsletter"> Newsletter </a>
                     </li>
                 </ul>
 
@@ -86,52 +86,7 @@
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=j2vmqsr7sxig4janv8sevdfu6gjr8x1qs7m12jeho8g939tv"></script>
 
 <script>
-    //Get the current year for the copyright
-    function getYear(){
-        $('#year').text(new Date().getFullYear());
-    }
-    getYear();
-    </script>
-
-
-<script>
-
-    function date_heure(id)
-    {
-        date = new Date;
-        annee = date.getFullYear();
-        moi = date.getMonth();
-        mois = new Array('Janvier', 'F&eacute;vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Ao&ucirc;t', 'Septembre', 'Octobre', 'Novembre', 'D&eacute;cembre');
-        j = date.getDate();
-        jour = date.getDay();
-        jours = new Array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi');
-        h = date.getHours();
-        if(h<10)
-        {
-            h = "0"+h;
-        }
-        m = date.getMinutes();
-        if(m<10)
-        {
-            m = "0"+m;
-        }
-        s = date.getSeconds();
-        if(s<10)
-        {
-            s = "0"+s;
-        }
-        resultat = 'Nous sommes le '+jours[jour]+' '+j+' '+mois[moi]+' '+annee+' il est '+h+':'+m+':'+s;
-        document.getElementById(id).innerHTML = resultat;
-        setTimeout('date_heure("'+id+'");','1000');
-        return true;
-    }
-    date_heure('clock');
-
-</script>
-
-<script>
-
-
+    
     tinymce.init({
         selector:'.wysiwyg',
         height: 500,
@@ -183,7 +138,10 @@
                 ]
             }]
     });
+
 </script>
+
+<script src="<?php echo $functions->filePath('js/adminFunctions.js'); ?>"> </script>
 
 </body>
 </html>

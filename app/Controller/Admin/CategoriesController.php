@@ -46,7 +46,7 @@ class CategoriesController extends AppController{
             if(isset($_SESSION['tokenDelCategory']) AND isset($_POST['tokenDelCategory']) AND !empty($_SESSION['tokenDelCategory']) AND !empty($_POST['tokenDelCategory'])){
                 if($_SESSION['tokenDelCategory']  == $_POST['tokenDelCategory']){
                     $this->Category->delete($_POST['id']);
-                    header("Location:/blog-alaska-oc/public/admin/categories");
+                    header("Location:/admin/categories");
                 }
             }
         }

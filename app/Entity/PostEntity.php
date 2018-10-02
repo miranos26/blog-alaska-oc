@@ -8,7 +8,7 @@ class PostEntity extends Entity{
     public $featured_image;
 
     public function getUrl(){
-        return '/blog-alaska-oc/public/article/' . $this->id;
+        return '/article/' . $this->id;
     }
 
     public function getExcerpt(){

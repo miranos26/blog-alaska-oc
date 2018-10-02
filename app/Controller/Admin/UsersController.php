@@ -11,7 +11,7 @@ class UsersController extends AppController{
 
     public function disconnect(){
         session_destroy();
-        header("Location:/blog-alaska-oc/public");
+        header("Location:/");
     }
 
 }

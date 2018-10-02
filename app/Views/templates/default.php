@@ -19,7 +19,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-light py-3" id="main-nav">
             <div class="container">
-                <a class="navbar-brand" href="<?php echo $functions->filePath('index.php') ?> ">
+                <a class="navbar-brand" href="<?php echo $functions->filePath('') ?> ">
                     <img src="<?php echo $functions->filePath('img/logo.jpg') ?>" width="80" height="67" alt="Jean Forteroche">
                 </a>
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -31,13 +31,13 @@
                             <a class="nav-link" href="<?php echo $functions->filePath('') ?>">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $functions->filePath('index.php#livre') ?>">Le livre</a>
+                            <a class="nav-link" href="<?php echo $functions->filePath('#livre') ?>">Le livre</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $functions->filePath('index.php#equipe') ?> ">Equipe</a>
+                            <a class="nav-link" href="<?php echo $functions->filePath('#equipe') ?> ">Equipe</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $functions->filePath('index.php#contact') ?>">Contact</a>
+                            <a class="nav-link" href="<?php echo $functions->filePath('#contact') ?>">Contact</a>
                         </li>
 
                         <?php if(isset($_SESSION['auth'])){ ?>
@@ -76,11 +76,11 @@
                             <label for="password">Mot de Passe </label>
                             <input type="password" placeholder="Password" class="form-control" name="password" id="password">
                             <p class="bg-danger text-white mt-2 rounded px-2 text-center d-none" id="empty-fields"> Veuillez compléter tous les champs du formulaire </p>
+                            <div class="bg-danger text-white p-2 rounded bounce-animated d-none" id="login-fail"> Identifiants incorrects </div>
                         </div>
                         <div class="modal-footer d-flex justify-content-between">
                             <div class="g-recaptcha" data-sitekey="6LfsEXMUAAAAAPIZG_CVhCtxEtd4wegw4h7cmGTQ"></div>
                             <input type="submit" value="Connexion" class="btn btn-primary">
-                            <div class="bg-danger text-white p-2 rounded bounce-animated d-none" id="login-fail"> Identifiants incorrects </div>
                         </div>
                      </div>
                 </form>

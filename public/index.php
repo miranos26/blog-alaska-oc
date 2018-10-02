@@ -1,5 +1,7 @@
 <?php
 
+@ini_set('display_errors', 'on');
+
 define('ROOT', dirname(__DIR__));
 require ROOT . '/app/App.php';
 
@@ -63,5 +65,5 @@ if($route){
     $method = $route['method'];
     $controller->$method($route['matches']);
 } else {
-    header("location:/blog-alaska-oc/public");
+    header("location:/jean-forteroche.kevincadier.fr");
 }

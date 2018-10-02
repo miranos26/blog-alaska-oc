@@ -121,7 +121,7 @@ class ViewFunction
     }
 
     public function filePath($name){
-        return '/blog-alaska-oc/public/' . $name;
+        return 'http://jean-forteroche.kevincadier.fr/' . $name;
     }
 
 }

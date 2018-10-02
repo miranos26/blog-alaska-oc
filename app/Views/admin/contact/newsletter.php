@@ -14,7 +14,7 @@
         <div>
             <a href="<?php echo $functions->filePath('admin') ?>" class="btn btn-dark btn-lg px-3 mt-3"> <i class="fas fa-angle-left mr-3"></i> Retour </a>
         </div>
-        <div class="row mt-5">
+        <div class="row my-5">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-around">

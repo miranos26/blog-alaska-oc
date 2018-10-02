@@ -29,7 +29,7 @@ class ContactController extends AppController{
 
     public function suscribe(){
 
-        if(!empty($_POST)){
+        if(!empty($_POST['newsName']) AND !empty($_POST['newsEmail'])){
             $name = htmlspecialchars($_POST['newsName']);
             $email = htmlspecialchars($_POST['newsEmail']);
 
