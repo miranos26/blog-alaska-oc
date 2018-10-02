@@ -31,16 +31,18 @@ class DBAuth {
         if($user){
             if($user['password'] === sha1($password)){
                 $_SESSION['auth'] = $user['id'];
-                if($user['role'] === 'admin'){
-                    $userType = 'admin';
-                    return $userType;
-                } elseif($user['role'] === 'basic_user'){
-                    $userType = 'basic_user';
-                    return $userType;
-                }
+                $_SESSION['token'] = md5(bin2hex(openssl_random_pseudo_bytes(6)));
+
+                return $user['role'];
             }
         }
         return false;
+    }
+
+
+    public function connexionNumber($ip){
+        $recherche = $this->db->prepare('SELECT * FROM connexion WHERE ip = ?', [$ip], '', true);
+        return $recherche;
     }
 
     public function logged(){

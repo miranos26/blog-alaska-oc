@@ -9,11 +9,10 @@
 </header>
 
 
-
 <section id="comments">
     <div class="container">
         <div>
-            <a href="index.php?p=admin.posts.index" class="btn btn-dark btn-lg px-3 mt-3 text-white"> <i class="fas fa-angle-left mr-3"></i> Retour </a>
+            <a href="<?php echo $functions->filePath('admin') ?>" class="btn btn-dark btn-lg px-3 mt-3 text-white"> <i class="fas fa-angle-left mr-3"></i> Retour </a>
         </div>
         <div class="row mt-5">
             <div class="col-md-12">
@@ -34,8 +33,7 @@
                         <tbody>
                         <?php foreach (array_reverse($comments) as $comment): ?>
 
-                        <?php $dateConverter = new viewFunction();
-
+                        <?php
                             $reported = $comment->reported;
 
                             if($reported === '1'){
@@ -43,12 +41,13 @@
                         <tr>
                             <td> <?= $comment->pseudo; ?> </td>
                             <td> <?= $comment->content; ?> </td>
-                            <td> <?= $dateConverter->dateConvert($comment->date_comment)?> </td>
+                            <td> <?= $functions->dateConvert($comment->date_comment)?> </td>
                             <td> <?= $reported; ?> </td>
                             <!-- L'utilisation d'un formulaire empeche le cross scripting, voir pour l'utilisation de token CSRS pour vraiment blinder la faille de sécurité -->
                             <td>
-                                <form action="?p=admin.comments.delete&id=<?= $comment->id; ?>" method="post" style="display:inline;">
+                                <form action="<?php echo $functions->filePath('admin/commentaires/supprimer/' . $comment->id ) ?> " method="post" style="display:inline;">
                                     <input type="hidden" name="id" value="<?= $comment->id ?>">
+                                    <input type="hidden" name="tokenDelComment" value="<?= $tokenDelComment?>">
                                     <button type="submit" class="btn btn-danger"> <i class="fas fa-times"></i> Supprimer </button>
                                 </form>
                             </td>
@@ -83,19 +82,18 @@
                                     <tbody>
                                     <?php foreach (array_reverse($comments) as $comment): ?>
 
-                                        <?php $dateConverter = new viewFunction();
-
+                                        <?php
                                         $reported = $comment->reported;
 
                                         if($reported === null){ ?>
                                             <tr>
                                                 <td> <?= $comment->pseudo; ?> </td>
                                                 <td> <?= $comment->content; ?> </td>
-                                                <td> <?= $dateConverter->dateConvert($comment->date_comment)?> </td>
+                                                <td> <?= $functions->dateConvert($comment->date_comment)?> </td>
                                                 <td> <?= $reported; ?> </td>
                                                 <!-- L'utilisation d'un formulaire empeche le cross scripting, voir pour l'utilisation de token CSRS pour vraiment blinder la faille de sécurité -->
                                                 <td>
-                                                    <form action="?p=admin.comments.delete&id=<?= $comment->id; ?>" method="post" style="display:inline;">
+                                                    <form action="<?php echo $functions->filePath('admin/commentaires/supprimer/' . $comment->id ) ?> " method="post" style="display:inline;">
                                                         <input type="hidden" name="id" value="<?= $comment->id ?>">
                                                         <button type="submit" class="btn btn-danger"> <i class="fas fa-times"></i> Supprimer </button>
                                                     </form>

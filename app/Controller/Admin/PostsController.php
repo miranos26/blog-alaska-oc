@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use Core\HTML\BootstrapForm;
+use App\Views\ViewFunction;
 
 class PostsController extends AppController{
 
@@ -12,6 +13,9 @@ class PostsController extends AppController{
     }
 
     public function index(){
+        $tokenDelArt = md5(bin2hex(openssl_random_pseudo_bytes(6)));
+        $_SESSION['tokenDelArt'] = $tokenDelArt;
+        $functions = new ViewFunction();
         $this->loadModel('Category');
         $this->loadModel('Comments');
         $this->loadModel('User');
@@ -20,7 +24,7 @@ class PostsController extends AppController{
         $comments= $this->Comments->extract('id', 'pseudo', 'content', 'date_comment', 'post_id', 'reported');
 
         $posts = $this->Post->all();
-        $this->render('admin.posts.index', compact('posts', 'categories', 'comments', 'users'));
+        $this->render('admin.posts.index', compact('posts', 'categories', 'comments', 'users', 'functions', 'tokenDelArt'));
     }
 
     public function upload($index, $destination, $maxsize = FALSE, $extensions = FALSE){
@@ -40,9 +44,9 @@ class PostsController extends AppController{
     public function add(){
 
         if(!empty($_FILES)){
+
             $extensions_images_valid = array('jpg', 'jpeg', 'gif', 'png');
             $extension_upload = strtolower(substr(strrchr($_FILES['image']['name'], '.'),1));
-
             $fileName = 'img/postsImages/' .uniqid(). '.'. $extension_upload;
             $this->upload('image', $fileName  , 4194304000, $extensions_images_valid);
         }
@@ -62,7 +66,7 @@ class PostsController extends AppController{
 
     }
 
-    public function edit(){
+    public function edit($request){
         if(!empty($_FILES)){
             $extensions_images_valid = array('jpg', 'jpeg', 'gif', 'png');
             $extension_upload = strtolower(substr(strrchr($_FILES['image']['name'], '.'),1));
@@ -72,7 +76,7 @@ class PostsController extends AppController{
         }
 
         if (!empty($_POST)) {
-            $result = $this->Post->update($_GET['id'], [
+            $result = $this->Post->update($request['id'], [
                 'title' => $_POST['title'],
                 'content' => $_POST['content'],
                 'category_id' => $_POST['category_id'],
@@ -82,7 +86,7 @@ class PostsController extends AppController{
                 return $this->index();
             }
         }
-        $post = $this->Post->find($_GET['id']);
+        $post = $this->Post->find($request['id']);
         $this->loadModel('Category');
         $categories = $this->Category->extract('id', 'title');
         $form = new BootstrapForm($post);
@@ -91,8 +95,12 @@ class PostsController extends AppController{
 
     public function delete(){
         if (!empty($_POST)) {
-            $result = $this->Post->delete($_POST['id']);
-            return $this->index();
+            if(isset($_SESSION['tokenDelArt']) AND isset($_POST['tokenDelArt']) AND !empty($_SESSION['tokenDelArt']) AND !empty($_POST['tokenDelArt'])){
+                if($_SESSION['tokenDelArt'] == $_POST['tokenDelArt']){
+                    $this->Post->delete($_POST['id']);
+                    header("Location:/blog-alaska-oc/public/admin");
+                }
+            }
         }
     }
 

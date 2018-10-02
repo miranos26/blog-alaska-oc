@@ -12,7 +12,7 @@
 <section id="post-edit">
     <div class="container">
         <div>
-            <a href="index.php?p=admin.posts.index" class="btn btn-dark btn-lg px-3 mt-3"> <i class="fas fa-angle-left mr-3"></i> Retour </a>
+            <a href="<?php echo $functions->filePath('admin') ?>" class="btn btn-dark btn-lg px-3 mt-3"> <i class="fas fa-angle-left mr-3"></i> Retour </a>
         </div>
 
         <div class="row mt-5">

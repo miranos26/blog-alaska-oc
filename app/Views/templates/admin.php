@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $functions->filePath('css/style.css') ?> " />
+    <link rel="stylesheet" href="<?php echo $functions->filePath('css/bootstrap.css') ?> ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -18,32 +18,32 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0">
         <div class="container">
-            <a href="index.php" class="navbar-brand"> Jean Forteroche </a>
+            <a href="<?php echo $functions->filePath('') ?>" class="navbar-brand"> Jean Forteroche </a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav">
                     <li class="nav-item px-2">
-                        <a href="index.php?p=admin.posts.index" class="nav-link active" id="dashboard"> Articles </a>
+                        <a href="<?php echo $functions->filePath('admin') ?>" class="nav-link active" id="dashboard"> Articles </a>
                     </li>
                     <li class="nav-item px-2">
-                        <a href="?p=admin.categories.index" class="nav-link" id="categories"> Categories </a>
+                        <a href="<?php echo $functions->filePath('admin/categories') ?>" class="nav-link" id="categories"> Categories </a>
                     </li>
                     <li class="nav-item px-2">
-                        <a href="?p=admin.comments.index" class="nav-link" id="comments"> Commentaires </a>
+                        <a href="<?php echo $functions->filePath('admin/commentaires') ?>" class="nav-link" id="comments"> Commentaires </a>
                     </li>
                     <li class="nav-item px-2">
-                        <a href="?p=admin.contact.index" class="nav-link" id="comments"> Messages </a>
+                        <a href="<?php echo $functions->filePath('admin/messages') ?>" class="nav-link" id="comments"> Messages </a>
                     </li>
                     <li class="nav-item px-2">
-                        <a href="?p=admin.contact.newsletter" class="nav-link" id="comments"> Newsletter </a>
+                        <a href="<?php echo $functions->filePath('admin/newsletter') ?>" class="nav-link" id="comments"> Newsletter </a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="?p=admin.users.disconnect" class="nav-link" id="deconnexion"> <i class="fas fa-user-times"> </i> Deconnexion
+                        <a href="<?php echo $functions->filePath('admin/deconnexion') ?>" class="nav-link" id="deconnexion"> <i class="fas fa-user-times"> </i>
                         </a>
                     </li>
                 </ul>

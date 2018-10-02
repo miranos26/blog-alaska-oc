@@ -1,6 +1,9 @@
 <?php
 
-class viewFunction
+namespace App\Views;
+
+
+class ViewFunction
 {
 
     public $secondes;
@@ -115,6 +118,10 @@ class viewFunction
     {
         $newDate = date('d-m-Y à H:i:s', strtotime($originalDate));
         return $newDate;
+    }
+
+    public function filePath($name){
+        return '/blog-alaska-oc/public/' . $name;
     }
 
 }

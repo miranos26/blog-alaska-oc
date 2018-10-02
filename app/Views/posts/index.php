@@ -16,7 +16,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
                         Billet Simple pour l'Alaska
                     </h1>
                     <p class="lead"> Partez pour le Grand Nord en découvrant ce roman </p>
-                    <a href="#" class="btn btn-outline-secondary btn-lg text-white"> <i class="fas fa-arrow-right"> </i>  Lire le livre
+                    <a href="articles/liste" class="btn btn-outline-danger btn-lg text-white"> <i class="fas fa-arrow-right"> </i>  Lire le livre
                     </a>
                 </div>
                 <div class="col-lg-6">
@@ -80,7 +80,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
 
 
 <!-- BLOG SECTION -->
-<section id="blog" class="py-3">
+<section id="livre" class="py-3">
     <div class="container">
         <h1 class="text-primary pb-3 text-center mb-5 mt-3"> Les derniers chapitres </h1>
         <div class="row">
@@ -101,14 +101,19 @@ $auth = new Core\Auth\DBAuth($app->getDb());
                     </div>
                 <?php endforeach; ?>
 
+        <div class="type-1 mx-auto mb-5 mt-4">
+            <div>
+                <a href="articles/liste" class=" btn btn-1">
+                    <span class="txt">Voir tous les chapitres</span>
+                    <span class="round"><i class="fa fa-chevron-right"></i></span>
+                </a>
             </div>
-            <a href="index.php?p=posts.postslist" class="btn btn-primary btn-dark col-md-6 mr-auto ml-auto mt-4 mb-5" type="button"> Tous les chapitres </a>
         </div>
     </div>
 </section>
 
 <!-- AUTHORS -->
-<section id="authors" class="my-5 text-center">
+<section id="equipe" class="my-5 text-center">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -229,7 +234,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
 
 
 <!-- CONTACT -->
-<section id="infos" class="bg-light py-5">
+<section id="contact" class="bg-light py-5">
     <div class="container">
         <div class="row">
             <div class="col-lg-9">
@@ -260,7 +265,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
                                 <i class="fas fa-pencil-alt"> </i>
                             </span>
                         </div>
-                        <textarea placeholder="Message" class="form-control" rows="5" id="message"> Message </textarea>
+                        <textarea placeholder="Message" class="form-control" rows="5" id="message"></textarea>
                     </div>
 
                     <input type="submit" value="Submit" class="btn btn-primary btn-block btn-lg">
@@ -270,7 +275,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
                 </form>
             </div>
 
-            <div class="col-lg-3 align-self-center">
+            <div class="col-lg-3 align-self-center mt-4">
                 <img src="img/logo.jpg" alt="Jean Forteroche logo" class="img-fluid">
             </div>
         </div>

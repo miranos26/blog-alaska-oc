@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $functions->filePath('css/style.css') ?>"/>
+    <link rel="stylesheet" href="<?php echo $functions->filePath('css/bootstrap.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 
     <title><?= App::getInstance()->title; ?> </title>
 
@@ -18,8 +19,8 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-light py-3" id="main-nav">
             <div class="container">
-                <a class="navbar-brand" href="index.php">
-                    <img src="img/logo.jpg" width="80" height="67" alt="Jean Forteroche">
+                <a class="navbar-brand" href="<?php echo $functions->filePath('index.php') ?> ">
+                    <img src="<?php echo $functions->filePath('img/logo.jpg') ?>" width="80" height="67" alt="Jean Forteroche">
                 </a>
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -27,26 +28,22 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.php">Accueil</a>
+                            <a class="nav-link" href="<?php echo $functions->filePath('') ?>">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Le livre</a>
+                            <a class="nav-link" href="<?php echo $functions->filePath('index.php#livre') ?>">Le livre</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php#authors">Equipe</a>
+                            <a class="nav-link" href="<?php echo $functions->filePath('index.php#equipe') ?> ">Equipe</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php#infos">Contact</a>
+                            <a class="nav-link" href="<?php echo $functions->filePath('index.php#contact') ?>">Contact</a>
                         </li>
 
                         <?php if(isset($_SESSION['auth'])){ ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="?p=admin.posts.index"> <i class=" p-2 rounded bg-primary text-white fas fa-user"></i> </a> </li>
-                        <?php }else { ?>
-                            <li class="nav-item">
-                            <button id="button-login-modal" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
-                        </li>
-                       <?php } ?>
+                                <a class="nav-link" href="<?php echo $functions->filePath('admin') ?>"> <i class=" p-2 rounded bg-danger text-white fas fa-user"></i> </a> </li>
+                        <?php } ?>
 
                     </ul>
                 </div>
@@ -65,24 +62,24 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Login</h5>
+                    <h5 class="modal-title">Connexion</h5>
                     <button type = "button" class="close" data-dismiss="modal" id="modal-button-login">&times;</button>
                 </div>
 
                 <form id = "connexion" method="POST">
                 <div class="modal-body">
                         <div class="form-group">
-                            <label for="username">Username</label>
+                            <label for="username">Pseudo</label>
                             <input type="text" placeholder="Username" class="form-control" name="username" id="username">
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
+                            <label for="password">Mot de Passe </label>
                             <input type="password" placeholder="Password" class="form-control" name="password" id="password">
                             <p class="bg-danger text-white mt-2 rounded px-2 text-center d-none" id="empty-fields"> Veuillez compléter tous les champs du formulaire </p>
                         </div>
                         <div class="modal-footer d-flex justify-content-between">
-                            <input type="submit" value="Login" class="btn btn-primary">
-                            <a href="index.php?p=users.suscribe"> Pas encore de compte ? S'inscrire ici </a>
+                            <div class="g-recaptcha" data-sitekey="6LfsEXMUAAAAAPIZG_CVhCtxEtd4wegw4h7cmGTQ"></div>
+                            <input type="submit" value="Connexion" class="btn btn-primary">
                             <div class="bg-danger text-white p-2 rounded bounce-animated d-none" id="login-fail"> Identifiants incorrects </div>
                         </div>
                      </div>
@@ -103,6 +100,9 @@
                     <p>
                         Copyright &copy; <span id="year"></span> - Jean Forteroche
                     </p>
+
+                    <button id="button-login-modal" data-toggle="modal" data-target="#loginModal">Connexion </button>
+
                 </div>
             </div>
         </div>
@@ -123,7 +123,7 @@
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
 
-    <script src="../public/js/homeFunctions.js"> </script>
+    <script src="<?php echo $functions->filePath('js/homeFunctions.js'); ?>"> </script>
 
     </body>
 

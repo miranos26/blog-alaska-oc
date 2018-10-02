@@ -8,7 +8,7 @@ class PostEntity extends Entity{
     public $featured_image;
 
     public function getUrl(){
-        return 'index.php?p=posts.show&id=' . $this->id;
+        return '/blog-alaska-oc/public/article/' . $this->id;
     }
 
     public function getExcerpt(){
@@ -18,8 +18,7 @@ class PostEntity extends Entity{
     }
 
     public function getFeatured_image(){
-        $var = 'test';
-        return $var;
+
     }
 
     public function getCategory_id(){

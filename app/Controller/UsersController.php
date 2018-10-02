@@ -13,44 +13,64 @@ class UsersController extends AppController {
     public function __construct(){
         parent::__construct();
         $this->loadModel('User');
-
     }
 
     public function login()
     {
-        $success = false;
 
         if(isset($_POST['password'])){
             $auth = new DBAuth(App::getInstance()->getDb());
-            $username = $_POST['username'];
-            $password = $_POST['password'];
 
-            if($auth->login($username, $password)){
-                $success = true;
+            $username = stripslashes($_POST['username']);
+            $password = stripslashes($_POST['password']);
+            $secret = '6LfsEXMUAAAAAACaqxunOpLWrBe0gMNcOTSEZpXZ';
+            $response = $_POST['captcha'];
+            $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secret}&response={$response}");
+            $captcha_success=json_decode($verify);
+
+            $result = $auth->login($username, $password);
+
+            if ($captcha_success->success == true AND $result !== false) {
+                echo json_encode([
+                    'userType' => $result,
+                    'success' => true
+                    ]);
+                return;
             }
         }
-        //Echo en Json pour que le JS puisse le lire (return marche pas)
-        echo json_encode(['success' => $success]);
+        echo json_encode(['success' => false]);
     }
 
-    public function suscribe(){
-        $this->render('users.index');
-    }
 
     public function add(){
         if (!empty($_POST)) {
-            $username = htmlspecialchars($_POST['username']);
+            $username = htmlspecialchars($_POST['create-username']);
             $user_email = htmlspecialchars($_POST['user_email']);
-            $password = htmlspecialchars(sha1($_POST['password']));
-            $role = 'basic_user';
+            $password = htmlspecialchars(sha1($_POST['create-password']));
             
             $this->User->create([
                 'username' => $username,
                 'user_email' => $user_email,
                 'password' => $password,
-                'role' => $role
+                'role' => 'basic_user'
             ]);
         }
+
+        $_SESSION["username"] = $username;
+        $_SESSION["user_email"] = $user_email;
         $this->render('users.profile', compact('username', 'user_email', 'password', 'role'));
     }
+
+    public function forbidden(){
+        $this->template = 'default';
+        $this->render('posts.forbidden');
+    }
+
+
+    public function error(){
+        echo'erreur';
+        $this->template = 'default';
+        $this->render('posts.error');
+    }
+
 }

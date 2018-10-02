@@ -2,6 +2,8 @@
 
 namespace Core\Controller;
 
+use App\Views\ViewFunction;
+
 class Controller{
 
     protected $viewPath;
@@ -11,7 +13,7 @@ class Controller{
 
     protected function render($view, $variables = []){
         ob_start();
-        require(__DIR__ . '/../../app/Views/viewFunction.php');
+        $functions = new ViewFunction();
         extract($variables);
         require($this->viewPath . str_replace('.', '/', $view) . '.php');
         $content = ob_get_clean();

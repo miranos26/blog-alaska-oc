@@ -42,8 +42,8 @@ class Table
         return $this->query("UPDATE {$this->table} SET $sql_part WHERE id = ?", $attributes, true);
     }
 
-    public function delete($id){
-
+    public function delete($id)
+    {
         return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id], true);
     }
 
@@ -70,6 +70,7 @@ class Table
         return $return;
     }
 
+    // Si attribut, requête préparée : empeche injection SQL
     public function query($statement, $attributes = null, $one = false)
     {
         if ($attributes) {

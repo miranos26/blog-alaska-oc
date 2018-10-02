@@ -17,17 +17,21 @@ class CommentsController extends AppController
     public function add()
     {
         if (!empty($_POST)) {
+            $pseudo = htmlspecialchars($_POST['pseudo']);
+            $content = htmlspecialchars($_POST['content']);
+            $post_id = htmlspecialchars($_POST['id']);
+
             $this->comments->create([
-                'pseudo' => $_POST['pseudo'],
-                'content' => $_POST['content'],
-                'post_id' => $_POST['post_id']
+                'pseudo' => $pseudo,
+                'content' => $content,
+                'post_id' => $post_id
             ]);
         }
     }
 
     public function report() {
 
-        if(!empty($POST)) {
+        if(!empty($_POST)) {
 
             $this->comments->update($_POST['comment_id'], [
                 'reported' => $_POST['reported']

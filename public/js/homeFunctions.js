@@ -1,12 +1,3 @@
-
-// Si admin déjà connecté, affiche un autre bouton vers l'admin
-$(document).ready(function() {
-    if(sessionStorage.getItem('user')){
-        $('#button-login-modal').addClass("d-none");
-        $('#button-session-admin').removeClass("d-none");
-    }
-});
-
 //Get the current year for the copyright
 $('#year').text(new Date().getFullYear());
 
@@ -17,6 +8,28 @@ $('.slider').slick({
     slideToScroll: 1
 });
 
+$('body').scrollspy({ target: '#main-nav' });
+
+// Add smooth scrolling
+$('#main-nav a').on('click', function (e) {
+    // Check for a hash value
+    if (this.hash !== '') {
+        // Prevent default behavior
+        e.preventDefault();
+
+        // Store hash
+        const hash = this.hash;
+
+        // Animate smooth scroll
+        $('html, body').animate({
+            scrollTop: $(hash).offset().top
+        }, 900, function () {
+            // Add hash to URL after scroll
+            window.location.hash = hash;
+        });
+    }
+});
+
 
 $('.signaler').submit(function (event){
     event.preventDefault();
@@ -25,8 +38,8 @@ $('.signaler').submit(function (event){
     let reported = 1;
 
     $.ajax({
-        method : "POST",
-        url : 'index.php?p=comments.report',
+        method : "post",
+        url : '/blog-alaska-oc/public/article/report',
         data: {
             'reported' : reported,
             'comment_id' : comment_id
@@ -44,28 +57,19 @@ $('.signaler').submit(function (event){
 $('#contactForm').submit(function(event){
     event.preventDefault();
 
-    function escapeHtml(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
+    let name = $.trim($('#name').val());
+    let email = $.trim($('#email').val());
+    let message = $.trim($('#message').val());
 
-    let name = escapeHtml(($.trim($('#name').val())));
-    let email = escapeHtml(($.trim($('#email').val())));
-    let message = escapeHtml(($.trim($('#message').val())));
-
-    if( name === '' || email === '' || message === '') {
+    if( name === 'Nom' || name === '' || email === 'Email' || email === '' || message === 'Message' || message === '') {
         $('#field-empty').removeClass("d-none");
         setTimeout(function () {
             $('#field-empty').fadeOut().empty();
         }, 4000);
     } else {
         $.ajax({
-            method: "POST",
-            url: 'index.php?p=contact.send',
+            method: 'post',
+            url: '/blog-alaska-oc/public/contact',
             data: {
                 'name': name,
                 'email': email,
@@ -93,24 +97,14 @@ $('#contactForm').submit(function(event){
     }
 });
 
-// Souscription Newsletter
-//Envoie d'un message
+
 $('#newsletter-form').submit(function(event){
     event.preventDefault();
 
-    function escapeHtml(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
+    let newsName =$.trim($('#newsletter-name').val());
+    let newsEmail = $.trim($('#newsletter-email').val());
 
-    let newsName = escapeHtml(($.trim($('#newsletter-name').val())));
-    let newsEmail = escapeHtml(($.trim($('#newsletter-email').val())));
-
-    if( newsName === '' || newsEmail === '') {
+    if( newsName === 'Nom' || newsEmail === 'Email') {
         $('#news-failed').removeClass("d-none");
         setTimeout(function () {
             $('#news-failed').fadeOut().empty();
@@ -118,7 +112,7 @@ $('#newsletter-form').submit(function(event){
     } else {
         $.ajax({
             method: "POST",
-            url: 'index.php?p=contact.suscribe',
+            url: 'newsletter-suscribe',
             data: {
                 'newsName': newsName,
                 'newsEmail': newsEmail,
@@ -143,24 +137,13 @@ $('#newsletter-form').submit(function(event){
 });
 
 
-// Affichage du formulaire dans l'HTML
-
 $('#commentForm').submit( function(event){
     event.preventDefault();
 
-    function escapeHtml(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
+    let pseudo = $.trim($('#pseudo').val());
+    let comment =$.trim($('#commentMessage').val());
 
-    let pseudo = escapeHtml(($.trim($('#pseudo').val())));
-    let comment = escapeHtml(($.trim($('#commentMessage').val())));
-
-    if( pseudo === '' || comment === ''){
+    if( pseudo === '' || pseudo === 'Pseudo' || comment === '' || comment === 'Message'){
         $('#comment-failed').removeClass("d-none");
         setTimeout(function() {
             $("#comment-failed").fadeOut().empty();
@@ -168,7 +151,7 @@ $('#commentForm').submit( function(event){
     } else {
         $.ajax({
             method: "POST",
-            url: 'index.php?p=comments.add',
+            url: '/blog-alaska-oc/public/article/addComment',
             data: {
                 'pseudo': pseudo,
                 'content': comment,
@@ -198,17 +181,9 @@ $('#commentForm').submit( function(event){
 $('#connexion').submit(function(event) {
     event.preventDefault();
 
-    function escapeHtml(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
 
-    let username = escapeHtml(($.trim($('#username').val())));
-    let password = escapeHtml(($.trim($('#password').val())));
+    let username = $.trim($('#username').val());
+    let password = $.trim($('#password').val());
 
     if (username === '' || password === '') {
         $('#empty-fields').removeClass("d-none");
@@ -218,20 +193,24 @@ $('#connexion').submit(function(event) {
     } else {
         $.ajax({
             method: "POST",
-            url: 'index.php?p=users.login',
+            url: '/blog-alaska-oc/public/login',
             dataType: 'json',
             data: {
                 'username': username,
-                'password': password
+                'password': password,
+                captcha: grecaptcha.getResponse()
+
             },
         }).fail(function(){
+            console.log('auth failed');
             $('#empty-fields').removeClass("d-none");
             setTimeout(function() {
                 $('#empty-fields').addClass("d-none");
             }, 6000);
         }).done(function(response){
             if(response.success){
-                window.location.href = "index.php?p=admin.posts.index";
+                console.log(response);
+                window.location.href = "/blog-alaska-oc/public/admin";
             } else {
                 $('#login-fail').removeClass("d-none");
                 setTimeout(function() {

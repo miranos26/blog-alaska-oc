@@ -8,7 +8,7 @@
                 <?php foreach($posts as $post): ?>
                     <div class="col-md-4 cards-home mb-4">
                         <div class="card">
-                            <img src="<?= $post->featured_image?>" alt="" class="img-fluid card-img-top">
+                            <img src=" <?php echo $functions->filePath($post->featured_image) ?>" alt="" class="img-fluid card-img-top">
                             <div class="card-body">
                                 <h4 class="card-title"> <a href="<?= $post->url ?>"> <?= $post->title; ?> </a> </h4>
                                 <small class="text-muted"> <?=$post->categorie .' ' . $post->id; ?> </small>
