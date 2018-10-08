@@ -11,6 +11,8 @@
         </div>
     </div>
 </header>
+http://jean-forteroche.kevincadier.fr/article/6
+
 
 
 <section id="chapitres" class="py-3">
@@ -19,10 +21,10 @@
             <div class="col-md-6">
                 <h1> <?= $article->title; ?> </h1>
                 <p> <em> <?= str_replace('s', '', $article->categorie) . ' ' . $article->id . " publié le " .  $functions->dateConvert($article->date) ?> </em> </p>
-                <p> <?= $article->content; ?> </p>
+                <?= $article->content; ?>
             </div>
             <div class="col-md-6">
-                <img src="<?php echo $functions->filePath($article->featured_image) ?>" class="img-fluid rounded-circle d-none d-md-block chapitres-img">
+                <img src="<?php echo $functions->filePath($article->featured_image) ?>" alt="image article" class="img-fluid rounded-circle d-none d-md-block chapitres-img">
             </div>
         </div>
     </div>

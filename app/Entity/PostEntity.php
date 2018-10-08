@@ -12,8 +12,8 @@ class PostEntity extends Entity{
     }
 
     public function getExcerpt(){
-        $html = '<p>' . substr($this->content, 0,200) . '... </p>';
-        $html .= '<p><a href=" '. $this->getUrl() . ' "> Lire la suite </a> </p>';
+        $html = substr($this->content, 0,200) . '...';
+        $html .= '<a href=" '. $this->getUrl() . ' "> Lire la suite </a>';
         return $html;
     }
 

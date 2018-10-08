@@ -39,10 +39,10 @@ $auth = new Core\Auth\DBAuth($app->getDb());
         <form id="newsletter-form">
             <div class="row">
                 <div class="col-md-4">
-                    <input type="text" name="newsletter-name" class="form-control form-control-lg mb-resp" placeholder="Nom" id="newsletter-name">
+                    <input title="Newsletter" type="text" name="newsletter-name" class="form-control form-control-lg mb-resp" placeholder="Nom" id="newsletter-name">
                 </div>
                 <div class="col-md-4">
-                    <input type="email" name= "newsletter-email" class="form-control form-control-lg mb-resp" placeholder="Email" id="newsletter-email">
+                    <input title="Email" type="email" name= "newsletter-email" class="form-control form-control-lg mb-resp" placeholder="Email" id="newsletter-email">
                 </div>
                 <div class="col-md-4">
                     <button class="btn btn-primary btn-lg btn-block">
@@ -58,8 +58,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
         <div class="bg-success mt-3 text-center rounded d-none" id="news-success">
             <p> Votre inscription a bien été prise en compte </p>
         </div>
-
-
+    </div>
 </section>
 
 <!-- ABOUT / WHY SECTION -->
@@ -68,7 +67,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
         <div class="row">
             <div class="col">
                 <div class="info-header mb-5">
-                    <h1 class="text-primary pb-3"> Pourquoi lire ce livre ? </h1>
+                    <h2 class="text-primary pb-3 home-title"> Pourquoi lire ce livre ? </h2>
                     <p class="lead pb-3">
                         C'est autant dans l'Alaska réel que dans un monde d'images que nous entraîne Jean Forteroche : un voyage qui nous fait rêver d'huile de phoque, de soupe de chouette, de steaks de caribou, de grizzlis dans la toundra cueillant des baies sauvages.S'embarquer avec J.Forteroche, c'est descendre en canoë et en kayak l'ultime rivière arctique, dans les Western Brooks Ranges, au-delà des derniers arbres, au royaume des grizzlis et des saumons, explorer l'arrière-pays avec d'étranges compagnons, pénétrer dans le bush, vivre tout au long du voyage avec le sentiment profond du silence, du froid, de l'espace immense, et rencontrer pourtant une foule extraordinaire de personnages hors du temps.
                     </p>
@@ -82,27 +81,29 @@ $auth = new Core\Auth\DBAuth($app->getDb());
 <!-- BLOG SECTION -->
 <section id="livre" class="py-3">
     <div class="container">
-        <h1 class="text-primary pb-3 text-center mb-5 mt-3"> Les derniers chapitres </h1>
+        <h2 class="text-primary pb-3 text-center mb-5 mt-3 home-title"> Les derniers chapitres </h2>
         <div class="row">
-                <div class="card-deck">
+            <div class="card-deck">
                 <?php foreach($posts as $post): ?>
-                    <div class="col-md-4 cards-home mb-4">
-                        <div class="card">
-                            <img src="<?= $post->featured_image?>" alt="" class="img-fluid card-img-top">
-                            <div class="card-body">
-                                <h4 class="card-title"> <a href="<?= $post->url ?>"> <?= $post->title; ?> </a> </h4>
-                                <small class="text-muted"> <?=$post->categorie .' ' . $post->id; ?> </small>
-                                <hr>
-                                <p class="card-text">
-                                    <?= $post->excerpt; ?>
-                                </p>
-                            </div>
+                <div class="col-md-4 cards-home mb-4">
+                    <div class="card">
+                        <img src="<?= $post->featured_image?>" alt="" class="img-fluid card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"> <a href="<?= $post->url ?>"> <?= $post->title; ?> </a> </h4>
+                            <small class="text-muted"> <?=$post->categorie .' ' . $post->id; ?> </small>
+                            <hr>
+                            <p class="card-text">
+                                <?= $post->excerpt; ?>
+                            </p>
                         </div>
                     </div>
+                </div>
                 <?php endforeach; ?>
+            </div>
+        </div>
 
         <div class="type-1 mx-auto mb-5 mt-4">
-            <div>
+            <div class="text-center">
                 <a href="articles/liste" class=" btn btn-1">
                     <span class="txt">Voir tous les chapitres</span>
                     <span class="round"><i class="fa fa-chevron-right"></i></span>
@@ -118,9 +119,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
         <div class="row">
             <div class="col">
                 <div class="info-header mb-5">
-                    <h1 class="text-primary pb-3">
-                        Rencontrez l'équipe
-                    </h1>
+                    <h2 class="text-primary pb-3 home-title"> Rencontrez l'équipe </h2>
                     <p class="lead">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis nibh a nisl tempus vestibulum.
                     </p>
@@ -133,7 +132,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
             <div class="col-lg-4 col-md6">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/person1.jpg" class="img-fluid rounded-circle w-50 mb-3" alt="Suzan Williams">
+                        <img src="img/person1.jpg" class="img-fluid rounded-circle w-50 mb-3" alt="Sandrine Astier">
                         <h3> Sandrine Astier </h3>
                         <h5 class="text-muted"> Editrice </h5>
                         <p> Vestibulum gravida interdum dolor, at blandit risus congue id. Ut nec euismod risus. In rutrum egestas lacinia. Aliquam at nisi nec enim tristique varius vitae id mauris.</p>
@@ -161,7 +160,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
             <div class="col-lg-4 col-md6 mt-resp-4">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/person2.jpg" class="img-fluid rounded-circle w-50 mb-3" alt="Suzan Williams">
+                        <img src="img/person2.jpg" class="img-fluid rounded-circle w-50 mb-3" alt="Portrait de Jean Forteroche">
                         <h3> Jean Forteroche </h3>
                         <h5 class="text-muted"> Romancier </h5>
                         <p> Vestibulum gravida interdum dolor, at blandit risus congue id. Ut nec euismod risus. In rutrum egestas lacinia. Aliquam at nisi nec enim tristique varius vitae id mauris.</p>
@@ -189,7 +188,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
             <div class="col-lg-4 col-md6 mt-resp-4">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/person3.jpg" class="img-fluid rounded-circle w-50 mb-3" alt="Suzan Williams">
+                        <img src="img/person3.jpg" class="img-fluid rounded-circle w-50 mb-3" alt="Portrait de Cindy Dubois">
                         <h3> Cindy Dubois</h3>
                         <h5 class="text-muted"> Community Manager </h5>
                         <p> Vestibulum gravida interdum dolor, at blandit risus congue id. Ut nec euismod risus. In rutrum egestas lacinia. Aliquam at nisi nec enim tristique varius vitae id mauris.</p>
@@ -224,7 +223,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
         <div class="row">
             <div class="col">
                 <div class="container pt-5">
-                    <h1>  « La vie des écrivains s'éclaire surtout par leurs ouvrages.» </h1>
+                    <h3 class="homequote">  « La vie des écrivains s'éclaire surtout par leurs ouvrages.» </h3>
                     <p class="d-none d-md-block author-name"> <em> Jean Forteroche </em> </p>
                 </div>
             </div>
@@ -247,7 +246,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
                                 <i class="fas fa-user"> </i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Nom" id="name">
+                        <input title="Nom" type="text" class="form-control" placeholder="Nom" id="name">
                     </div>
 
                     <div class="input-group input-group-lg mb-3">
@@ -256,7 +255,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
                                 <i class="fas fa-envelope"> </i>
                             </span>
                         </div>
-                        <input type="email" class="form-control" placeholder="Email" id="email">
+                        <input title="Email" type="email" class="form-control" placeholder="Email" id="email">
                     </div>
 
                     <div class="input-group input-group-lg mb-3">
@@ -265,7 +264,7 @@ $auth = new Core\Auth\DBAuth($app->getDb());
                                 <i class="fas fa-pencil-alt"> </i>
                             </span>
                         </div>
-                        <textarea placeholder="Message" class="form-control" rows="5" id="message"></textarea>
+                        <textarea title="Message" placeholder="Message" class="form-control" rows="5" id="message"></textarea>
                     </div>
 
                     <input type="submit" value="Submit" class="btn btn-primary btn-block btn-lg">
